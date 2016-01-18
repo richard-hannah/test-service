@@ -1,18 +1,23 @@
 module.exports = function(grunt) {
+
     grunt.initConfig({
-        uglify: {
-            core: {
-                files: [{
-                    expand: true,
-                    cwd: 'src/test/resources',
-                    src: 'public/js/**/*.js',
-                    dest: "target/classes",
-                    ext: '.min.js'
-                }]
+        shell: {                                // Task
+            runtests1: {                      // Target
+                options: {                      // Options
+                    stdout: true
+                },
+                command: 'jasmine-node spec/external'
+            },
+            runtests2: {                      // Target
+                options: {                      // Options
+                    stdout: true
+                },
+                command: 'jasmine-node spec/internal'
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.registerTask('default', ['uglify']);
+    grunt.loadNpmTasks('grunt-shell');
+    grunt.registerTask('default', ['shell']);
 };
+
